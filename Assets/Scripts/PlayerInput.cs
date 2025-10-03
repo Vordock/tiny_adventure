@@ -3,39 +3,52 @@ using UnityEngine.InputSystem;
 
 namespace TinyAdventure
 {
+    [RequireComponent(typeof(CharacterMoviment))]
     public class PlayerInput : MonoBehaviour
     {
-        [SerializeField] private float moveSpeed = 5f;
-        private Rigidbody2D rb;
-        private InputActions inputActions; // Nome da sua classe gerada
+        private CharacterMoviment moveScript;
+
+        public SpriteRenderer spriteRenderer;
+
+        public InputActions inputActions; // Nome da sua classe gerada
 
         private void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
             inputActions = new InputActions();
+
+            moveScript = GetComponent<CharacterMoviment>();
+
         }
 
         private void OnEnable()
         {
-            inputActions.Player.Move.performed += OnMove;
-            inputActions.Player.Move.canceled += OnMove;
+            inputActions.Player.Move.performed += MoveHandler;
+            inputActions.Player.Move.canceled += MoveHandler;
             inputActions.Enable();
         }
 
         private void OnDisable()
         {
-            inputActions.Player.Move.performed -= OnMove;
-            inputActions.Player.Move.canceled -= OnMove;
+            inputActions.Player.Move.performed -= MoveHandler;
+            inputActions.Player.Move.canceled -= MoveHandler;
             inputActions.Disable();
         }
 
-        private void OnMove(InputAction.CallbackContext context)
+        public void MoveHandler(InputAction.CallbackContext context)
         {
             Vector2 input = context.ReadValue<Vector2>();
-            rb.linearVelocity = new Vector2(input.x * moveSpeed, input.y * moveSpeed);
+
+            moveScript.Move(input);
+
+           if (spriteRenderer) FlipSpriteByDirection(input);
         }
 
-
+        void FlipSpriteByDirection(Vector2 direction)
+        {
+            if (direction.x != 0)
+                spriteRenderer.flipX = direction.x < 0;
+        }
+    
     }
 
 }
