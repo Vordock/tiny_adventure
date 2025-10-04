@@ -3,27 +3,33 @@ using UnityEngine.InputSystem;
 
 namespace TinyAdventure
 {
-    [RequireComponent(typeof(CharacterMoviment))]
+    [RequireComponent(typeof(TopDownCharMove), typeof(TopDownMeleeAttack))]
     public class PlayerInput : MonoBehaviour
     {
-        private CharacterMoviment moveScript;
+        TopDownCharMove moveScript;
+        TopDownMeleeAttack attackScript;
 
         public SpriteRenderer spriteRenderer;
 
         public InputActions inputActions; // Nome da sua classe gerada
 
+        public Vector2 movingDirection;
+        public Vector2 lastDirection;
+
         private void Awake()
         {
             inputActions = new InputActions();
 
-            moveScript = GetComponent<CharacterMoviment>();
+            moveScript = GetComponent<TopDownCharMove>();
 
+            attackScript = GetComponent<TopDownMeleeAttack>();
         }
 
         private void OnEnable()
         {
             inputActions.Player.Move.performed += MoveHandler;
             inputActions.Player.Move.canceled += MoveHandler;
+
             inputActions.Enable();
         }
 
@@ -36,11 +42,23 @@ namespace TinyAdventure
 
         public void MoveHandler(InputAction.CallbackContext context)
         {
-            Vector2 input = context.ReadValue<Vector2>();
+            movingDirection = context.ReadValue<Vector2>();
 
-            moveScript.Move(input);
+            if (movingDirection != Vector2.zero) lastDirection = movingDirection;
 
-           if (spriteRenderer) FlipSpriteByDirection(input);
+            if (spriteRenderer) FlipSpriteByDirection(movingDirection);
+
+            moveScript.Move(movingDirection);
+        }
+
+        void Update()
+        {
+            if (inputActions.Player.Attack.WasPressedThisFrame())
+            {
+                //Debug.Log($"Last Direction to attack: {lastDirection}");
+
+                attackScript.StartAttack(lastDirection);
+            }
         }
 
         void FlipSpriteByDirection(Vector2 direction)
@@ -48,7 +66,5 @@ namespace TinyAdventure
             if (direction.x != 0)
                 spriteRenderer.flipX = direction.x < 0;
         }
-    
     }
-
 }
