@@ -1,31 +1,33 @@
 using UnityEngine;
 
-
-public class TopDownMeleeWeapon : MonoBehaviour
+namespace TinyAdventure
 {
-    public string damageAgent;
-    public int damageAmount;
-
-    void Start()
+    public class TopDownMeleeWeapon : MonoBehaviour
     {
-        damageAgent = transform.parent.tag;
+        public string damageAgent;
+        public int damageAmount;
 
-        gameObject.SetActive(false);
-    }
-
-    void OnTriggerEnter2D(Collider2D _other)
-    {
-        // se o objeto e vulneravel ao ataque
-        if (_other.gameObject.layer == LayerMask.NameToLayer("Vulnerable"))
+        void Start()
         {
-            if (damageAgent.Equals("Player"))
-            {
-                //Destroy(_other.gameObject);
-                //_other.gameObject.SetActive(false);
+            damageAgent = transform.parent.tag;
 
-                if (_other.TryGetComponent(out Health health))
+            gameObject.SetActive(false);
+        }
+
+        void OnTriggerEnter2D(Collider2D _other)
+        {
+            // se o objeto e vulneravel ao ataque
+            if (_other.gameObject.layer == LayerMask.NameToLayer("Vulnerable"))
+            {
+                if (damageAgent.Equals("Player"))
                 {
-                    health.GetDamage(damageAmount);
+                    //Destroy(_other.gameObject);
+                    //_other.gameObject.SetActive(false);
+
+                    if (_other.TryGetComponent(out Health health))
+                    {
+                        health.GetDamage(damageAmount);
+                    }
                 }
             }
         }

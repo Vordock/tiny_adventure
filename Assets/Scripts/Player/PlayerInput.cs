@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace TinyAdventure
 {
-    [RequireComponent(typeof(TopDownCharMove), typeof(TopDownMeleeAttack))]
+    [RequireComponent(typeof(TopDownCharMove), typeof(TopDownMeleeAttack), typeof(TopDownCharInteraction))]
     public class PlayerInput : MonoBehaviour
     {
         TopDownCharMove moveScript;
@@ -58,6 +58,11 @@ namespace TinyAdventure
                 //Debug.Log($"Last Direction to attack: {lastDirection}");
 
                 attackScript.StartAttack(lastDirection);
+            }
+
+            if (inputActions.Player.Interact.WasPressedThisFrame())
+            {
+                GetComponent<TopDownCharInteraction>().SetInteractionInPosition();
             }
         }
 
