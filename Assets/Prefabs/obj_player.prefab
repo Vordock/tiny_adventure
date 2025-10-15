@@ -390,9 +390,9 @@ GameObject:
   - component: {fileID: 3418221774869637393}
   - component: {fileID: 6395146195982758041}
   - component: {fileID: 4770903032499981041}
+  - component: {fileID: 2085670541299632805}
   - component: {fileID: 403734538230106302}
   - component: {fileID: 694001835830377593}
-  - component: {fileID: 2085670541299632805}
   m_Layer: 0
   m_Name: obj_player
   m_TagString: Player
@@ -469,6 +469,19 @@ MonoBehaviour:
   attackCooldown: 0.5
   attackSpeed: 0.2
   canAttack: 1
+--- !u!114 &2085670541299632805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502412795872178179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ad38fdfaa3bcb449b722362d76d473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TinyAdventure.TopDownCharInteraction
+  actionTrigger: {fileID: 2698404860825438615}
 --- !u!50 &403734538230106302
 Rigidbody2D:
   serializedVersion: 5
@@ -533,19 +546,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.002732575, y: -0.068315506}
   m_Size: {x: 0.62570035, y: 0.863369}
   m_Direction: 0
---- !u!114 &2085670541299632805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4502412795872178179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ad38fdfaa3bcb449b722362d76d473, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TinyAdventure.TopDownCharInteraction
-  actionTrigger: {fileID: 2698404860825438615}
 --- !u!1 &4830044495836550130
 GameObject:
   m_ObjectHideFlags: 0

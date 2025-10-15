@@ -18,6 +18,11 @@ public class InteractionTrigger : MonoBehaviour
                 DataManager.mushroomCount++;
                 Debug.Log($"Cogumenlo coletado! Quantidade:{DataManager.mushroomCount}");
             }
+
+            if (collision.CompareTag("Sign"))
+            {
+
+            }
         }
     }
 }

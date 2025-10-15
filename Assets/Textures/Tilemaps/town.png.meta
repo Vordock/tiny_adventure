@@ -884,10 +884,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 4, y: -2}
-        - {x: 2, y: 1}
-        - {x: -2, y: 1}
-        - {x: -4, y: -2}
+      - - {x: 7, y: -2}
+        - {x: 7, y: 8}
+        - {x: -7, y: 8}
+        - {x: -7, y: -2}
         - {x: -3, y: -7}
         - {x: 3, y: -7}
       tessellationDetail: 0
@@ -912,10 +912,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 4, y: -2}
-        - {x: 2, y: 1}
-        - {x: -2, y: 1}
-        - {x: -4, y: -2}
+      - - {x: 7, y: -2}
+        - {x: 7, y: 8}
+        - {x: -7, y: 8}
+        - {x: -8, y: 1}
         - {x: -3, y: -7}
         - {x: 3, y: -7}
       tessellationDetail: 0
