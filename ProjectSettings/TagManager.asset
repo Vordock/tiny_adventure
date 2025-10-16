@@ -8,6 +8,7 @@ TagManager:
   - Mushroom
   - Sign
   - Crate
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - UI
   - Vulnerable
   - Interaction
-  - 
+  - Obstacle
   - 
   - 
   - 
@@ -44,6 +45,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Character
+    uniqueID: 2824968555
     locked: 0
   - name: HUD
     uniqueID: 926921163

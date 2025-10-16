@@ -13,7 +13,6 @@ public class InteractionTrigger : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Interaction"))
         {
-
             if (!string.IsNullOrEmpty(tag1) && collision.CompareTag(tag1))
             {
                 DataManager.CollectMushroom();
@@ -22,7 +21,15 @@ public class InteractionTrigger : MonoBehaviour
 
             else if (!string.IsNullOrEmpty(tag2) && collision.CompareTag(tag2))
             {
-                collision.gameObject.SetActive(false);
+                if (collision.TryGetComponent(out SimpleDialog dialog))
+                {
+                    dialog.ActiveDialog();
+                }
+
+                else
+                {
+                    Debug.LogWarning("No SimpleDialog component found on this GameObject.");
+                }
             }
 
             else if (!string.IsNullOrEmpty(tag3) && collision.CompareTag(tag3))

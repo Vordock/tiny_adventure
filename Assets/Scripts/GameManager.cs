@@ -10,8 +10,10 @@ public class GameManager : MonoBehaviour
     public static Action AddKey;
 
     public static Action PlayWoodCrack;
+    public static Action PlayPickupItem;
 
     public static Action<bool> HoldPlayerMovement;
+
 
     public int playerCoins;
 }

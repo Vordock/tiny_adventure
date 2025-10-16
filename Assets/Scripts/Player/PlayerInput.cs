@@ -35,7 +35,7 @@ namespace TinyAdventure
 
             inputActions.Enable();
 
-
+            GameManager.HoldPlayerMovement += HoldPlayerMovement;
         }
 
         private void OnDisable()
@@ -43,6 +43,9 @@ namespace TinyAdventure
             inputActions.Player.Move.performed -= MoveHandler;
             inputActions.Player.Move.canceled -= MoveHandler;
             inputActions.Disable();
+
+
+            GameManager.HoldPlayerMovement -= HoldPlayerMovement;
         }
 
         public void MoveHandler(InputAction.CallbackContext context)
@@ -88,14 +91,26 @@ namespace TinyAdventure
             canMove = false;
             moveScript.Move(Vector2.zero);
             yield return new WaitForSeconds(seconds);
-            moveScript.Move(lastDirection);
+
             canMove = true;
+            // Lê o input atual do jogador
+            movingDirection = inputActions.Player.Move.ReadValue<Vector2>();
+            moveScript.Move(movingDirection);
         }
 
         void HoldPlayerMovement(bool hold)
         {
-            if (hold) moveScript.Move(Vector2.zero);
-            else moveScript.Move(lastDirection);
+            if (hold)
+            {
+                moveScript.Move(Vector2.zero);
+                canMove = false;
+            }
+
+            else
+            {
+                canMove = true;
+                moveScript.Move(lastDirection);
+            }
         }
     }
 }
