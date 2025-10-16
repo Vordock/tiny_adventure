@@ -1,0 +1,5 @@
+{
+  "msbuild": {
+    "useLegacySdkResolver": true
+  }
+}

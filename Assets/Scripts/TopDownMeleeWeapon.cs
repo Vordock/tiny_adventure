@@ -26,6 +26,11 @@ namespace TinyAdventure
 
                     if (_other.TryGetComponent(out Health health))
                     {
+                        if (_other.CompareTag("Crate"))
+                        {
+                            GameManager.PlayWoodCrack?.Invoke();
+                        }
+
                         health.GetDamage(damageAmount);
                     }
                 }

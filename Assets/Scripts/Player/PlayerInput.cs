@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,8 @@ namespace TinyAdventure
         public Vector2 movingDirection;
         public Vector2 lastDirection;
 
+        bool canMove = true;
+
         private void Awake()
         {
             inputActions = new InputActions();
@@ -31,6 +34,8 @@ namespace TinyAdventure
             inputActions.Player.Move.canceled += MoveHandler;
 
             inputActions.Enable();
+
+
         }
 
         private void OnDisable()
@@ -42,13 +47,16 @@ namespace TinyAdventure
 
         public void MoveHandler(InputAction.CallbackContext context)
         {
-            movingDirection = context.ReadValue<Vector2>();
+            if (canMove)
+            {
+                movingDirection = context.ReadValue<Vector2>();
 
-            if (movingDirection != Vector2.zero) lastDirection = movingDirection;
+                if (movingDirection != Vector2.zero) lastDirection = movingDirection;
 
-            if (spriteRenderer) FlipSpriteByDirection(movingDirection);
+                if (spriteRenderer) FlipSpriteByDirection(movingDirection);
 
-            moveScript.Move(movingDirection);
+                moveScript.Move(movingDirection);
+            }
         }
 
         void Update()
@@ -58,18 +66,36 @@ namespace TinyAdventure
                 //Debug.Log($"Last Direction to attack: {lastDirection}");
 
                 attackScript.StartAttack(lastDirection);
+
+                StartCoroutine(StopMovementForSeconds(attackScript.attackSpeed));
             }
 
             if (inputActions.Player.Interact.WasPressedThisFrame())
             {
                 GetComponent<TopDownCharInteraction>().SetInteractionInPosition();
             }
+
         }
 
         void FlipSpriteByDirection(Vector2 direction)
         {
             if (direction.x != 0)
                 spriteRenderer.flipX = direction.x < 0;
+        }
+
+        IEnumerator StopMovementForSeconds(float seconds)
+        {
+            canMove = false;
+            moveScript.Move(Vector2.zero);
+            yield return new WaitForSeconds(seconds);
+            moveScript.Move(lastDirection);
+            canMove = true;
+        }
+
+        void HoldPlayerMovement(bool hold)
+        {
+            if (hold) moveScript.Move(Vector2.zero);
+            else moveScript.Move(lastDirection);
         }
     }
 }

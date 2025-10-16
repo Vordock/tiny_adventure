@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class InteractionTrigger : MonoBehaviour
 {
+    public string tag1, tag2, tag3;
+
     void Start()
     {
         gameObject.SetActive(false);
@@ -11,17 +13,21 @@ public class InteractionTrigger : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Interaction"))
         {
-            collision.gameObject.SetActive(false);
 
-            if (collision.CompareTag("Mushroom"))
+            if (!string.IsNullOrEmpty(tag1) && collision.CompareTag(tag1))
             {
-                DataManager.mushroomCount++;
-                Debug.Log($"Cogumenlo coletado! Quantidade:{DataManager.mushroomCount}");
+                DataManager.CollectMushroom();
+                collision.gameObject.SetActive(false);
             }
 
-            if (collision.CompareTag("Sign"))
+            else if (!string.IsNullOrEmpty(tag2) && collision.CompareTag(tag2))
             {
+                collision.gameObject.SetActive(false);
+            }
 
+            else if (!string.IsNullOrEmpty(tag3) && collision.CompareTag(tag3))
+            {
+                collision.gameObject.SetActive(false);
             }
         }
     }

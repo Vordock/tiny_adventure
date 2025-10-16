@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Interaction
   - Mushroom
+  - Sign
+  - Crate
   layers:
   - Default
   - TransparentFX

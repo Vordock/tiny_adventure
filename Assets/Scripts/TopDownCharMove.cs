@@ -21,11 +21,11 @@ namespace TinyAdventure
 
             GetComponentInChildren<Canvas>().worldCamera = Camera.main;
         }
+        private Vector2 movement;
 
-        public void Move(Vector2 input)
+        public void Move(Vector2 direction)
         {
-            Vector2 direction = input.normalized;
-            body.linearVelocity = moveSpeed * direction;
+            movement = direction.normalized;
 
             if (direction.x > 0)
             {
@@ -53,6 +53,15 @@ namespace TinyAdventure
             }
         }
 
-        public void Stop() => body.linearVelocity = Vector2.zero;
+        void FixedUpdate()
+        {
+            body.linearVelocity = movement * moveSpeed;
+        }
+
+        public void Stop()
+        {
+            body.linearVelocity = Vector2.zero;
+            movement = Vector2.zero;
+        }
     }
 }
