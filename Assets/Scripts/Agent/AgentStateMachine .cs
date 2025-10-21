@@ -1,61 +1,79 @@
+using System;
+using TinyAdventure;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AgentVision), typeof(AgentPatrol))]
+[RequireComponent(typeof(AgentChase), typeof(AgentAttack))]
 public class AgentStateMachine : MonoBehaviour
 {
-    public enum AgentState { Patrol, Chase, Attack }
-    public AgentState currentState;
+    // public enum AgentState { Patrol, Chase, Attack }
+    // public AgentState currentState;
 
-    [Header("References")]
-    public Transform player;
-    public AgentPatrol patrol;
-    public AgentChase chase;
-    public AgentAttack attack;
-    public AgentVision vision;
-    public AgentAnimator agentAnimator;
+    // [Header("References")]
+    // public Transform player;
+    // public AgentPatrol patrol;
+    // public AgentChase chase;
+    // public AgentAttack attack;
+    // public AgentVision vision;
+    // //public AgentAnimator agentAnimator;
 
-    [Header("Ranges")]
-    public float detectionRange = 5f;
-    public float stopChaseRange = 7f;
-    public float attackRange = 1.2f;
+    // [Header("Ranges")]
+    // public float detectionRange = 5f;
+    // public float stopChaseRange = 7f;
+    // public float attackRange = 1.2f;
 
-    private Rigidbody2D rb;
+    // private Rigidbody2D rb;
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        currentState = AgentState.Patrol;
-    }
+    // void Awake()
+    // {
+    //     rb = GetComponent<Rigidbody2D>();
 
-    void FixedUpdate()
-    {
-        float distToPlayer = Vector2.Distance(transform.position, player.position);
+    //     vision = GetComponent<AgentVision>();
+    //     patrol = GetComponent<AgentPatrol>();
+    //     chase = GetComponent<AgentChase>();
+    //     attack = GetComponent<AgentAttack>();
+    // }
 
-        switch (currentState)
-        {
-            case AgentState.Patrol:
-                patrol.DoPatrol(rb);
-                agentAnimator.SetWalking(rb.linearVelocity.magnitude > 0.1f);
-                if (distToPlayer <= detectionRange && vision.CanSeePlayer(player))
-                    currentState = AgentState.Chase;
-                break;
+    // void Start()
+    // {
+    //     player = GameObject.FindGameObjectWithTag("Player").transform;
+    //     currentState = AgentState.Patrol;
+    // }
 
-            case AgentState.Chase:
-                chase.DoChase(rb, player);
-                agentAnimator.SetWalking(true);
-                if (distToPlayer <= attackRange)
-                    currentState = AgentState.Attack;
-                else if (distToPlayer > stopChaseRange || !vision.CanSeePlayer(player))
-                    currentState = AgentState.Patrol;
-                break;
+    // void FixedUpdate()
+    // {
+    //     float distToPlayer = Vector2.Distance(transform.position, player.position);
 
-            case AgentState.Attack:
-                attack.DoAttack(rb, player);
-                agentAnimator.TriggerAttack();
-                agentAnimator.SetWalking(false);
-                if (distToPlayer > attackRange)
-                    currentState = AgentState.Chase;
-                break;
-        }
-    }
+    //     switch (currentState)
+    //     {
+    //         case AgentState.Patrol:
+    //             patrol.DoPatrol(rb);
+    //             //agentAnimator.SetWalking(rb.linearVelocity.magnitude > 0.1f);
+    //             if (distToPlayer <= detectionRange && vision.CanSeePlayer(player))
+    //                 currentState = AgentState.Chase;
+    //             break;
+
+    //         case AgentState.Chase:
+    //             chase.DoChase(rb, player);
+    //             //agentAnimator.SetWalking(true);
+    //             if (distToPlayer <= attackRange)
+    //                 currentState = AgentState.Attack;
+    //             else if (distToPlayer > stopChaseRange || !vision.CanSeePlayer(player))
+    //                 currentState = AgentState.Patrol;
+    //             break;
+
+    //         case AgentState.Attack:
+
+    //             if (TryGetComponent(out TopDownMeleeAttack attackScript))
+    //             {
+    //                 attackScript.StartAttack(chase.CurrentDirection);
+    //             }
+
+    //             //agentAnimator.TriggerAttack();
+    //             //agentAnimator.SetWalking(false);
+    //             if (distToPlayer > attackRange)
+    //                 currentState = AgentState.Chase;
+    //             break;
+    //     }
+    //}
 }

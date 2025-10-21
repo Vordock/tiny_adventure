@@ -1,14 +1,16 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class BreakableObject : MonoBehaviour
 {
     public GameObject objectToDrop;
 
-    void OnDisable()
+    public AudioClip destroySFX;
+
+    void OnDestroy()
     {
-        if (objectToDrop)
-        {
-            //drop object
-        }
+        if (destroySFX) AudioManager.Instance.PlaySFX(destroySFX);
+
+        if (objectToDrop) Instantiate(objectToDrop, transform.position, quaternion.identity);
     }
 }

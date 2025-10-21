@@ -1,10 +1,7 @@
 using System;
-using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public static class GameAction
 {
-    public static GameManager instance;
-
     public static Action AddCoin;
     public static Action AddPotion;
     public static Action AddKey;
@@ -14,6 +11,5 @@ public class GameManager : MonoBehaviour
 
     public static Action<bool> HoldPlayerMovement;
 
-
-    public int playerCoins;
+    public static Action PlayerSpawned;
 }

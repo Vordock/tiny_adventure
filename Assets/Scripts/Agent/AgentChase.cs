@@ -3,13 +3,25 @@ using UnityEngine;
 public class AgentChase : MonoBehaviour
 {
     public float speed = 3f;
-    public LayerMask obstacleMask;
+    LayerMask obstacleMask;
+
+    public Vector2 CurrentDirection { get; private set; } // <- direção atual exposta
+
+    void Awake()
+    {
+        if (TryGetComponent(out AgentVision vision))
+        {
+            obstacleMask = vision.obstacleMask;
+        }
+    }
 
     public void DoChase(Rigidbody2D rb, Transform player)
     {
         Vector2 dir = (player.position - transform.position).normalized;
         dir = AvoidObstacles(dir);
         rb.linearVelocity = dir * speed;
+
+        CurrentDirection = dir; // <- guarda a direção usada
     }
 
     Vector2 AvoidObstacles(Vector2 moveDir)

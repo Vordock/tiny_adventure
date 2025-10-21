@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-	public Transform player; // Referência ao transform do jogador
+	Transform player; // Referência ao transform do jogador
 	public float smoothSpeed = 0.125f; // Velocidade de suavização
 	public Vector3 offset; // Deslocamento da câmera em relação ao jogador
 
@@ -12,18 +12,19 @@ public class CameraFollow : MonoBehaviour
 	public float minY;
 	public float maxY;
 
-	void Start()
+	void OnEnable()
 	{
-		Transform tempPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+		GameAction.PlayerSpawned += SetPlayer;
+	}
 
-		if (tempPlayer)
-		{
-			player = tempPlayer;
-		}
-		else
-		{
-			Debug.LogError("Player not found! Please ensure the player GameObject is tagged as 'Player'.");
-		}
+	void OnDisable()
+	{
+		GameAction.PlayerSpawned -= SetPlayer;
+	}
+
+	void SetPlayer()
+	{
+		player = GameObject.FindGameObjectWithTag("Player").transform;
 	}
 
 	void LateUpdate()

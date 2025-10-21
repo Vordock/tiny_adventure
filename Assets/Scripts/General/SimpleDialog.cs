@@ -38,14 +38,14 @@ public class SimpleDialog : MonoBehaviour
         {
             dialogCanvas.SetActive(true);
             DataManager.playerIsTalking = true;
-            GameManager.HoldPlayerMovement?.Invoke(true);
+            GameAction.HoldPlayerMovement?.Invoke(true);
         }
 
         else
         {
             dialogCanvas.SetActive(false);
             DataManager.playerIsTalking = false;
-            GameManager.HoldPlayerMovement?.Invoke(false);
+            GameAction.HoldPlayerMovement?.Invoke(false);
         }
     }
 }

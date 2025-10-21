@@ -22,7 +22,6 @@ namespace TinyAdventure
 
             weapon.gameObject.SetActive(true);
 
-
             if (TryGetComponent(out TopDownCharMove moveScript))
 
                 // Prioriza o eixo X

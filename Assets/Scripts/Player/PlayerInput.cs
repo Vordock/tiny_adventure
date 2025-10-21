@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace TinyAdventure
 {
-    [RequireComponent(typeof(TopDownCharMove), typeof(TopDownMeleeAttack), typeof(TopDownCharInteraction))]
+    [RequireComponent(typeof(TopDownCharMove), typeof(TopDownMeleeAttack))]
     public class PlayerInput : MonoBehaviour
     {
         TopDownCharMove moveScript;
@@ -19,6 +19,8 @@ namespace TinyAdventure
 
         bool canMove = true;
 
+        PlayerSounds sounds;
+
         private void Awake()
         {
             inputActions = new InputActions();
@@ -26,6 +28,8 @@ namespace TinyAdventure
             moveScript = GetComponent<TopDownCharMove>();
 
             attackScript = GetComponent<TopDownMeleeAttack>();
+
+            sounds = GetComponent<PlayerSounds>();
         }
 
         private void OnEnable()
@@ -35,7 +39,7 @@ namespace TinyAdventure
 
             inputActions.Enable();
 
-            GameManager.HoldPlayerMovement += HoldPlayerMovement;
+            GameAction.HoldPlayerMovement += HoldPlayerMovement;
         }
 
         private void OnDisable()
@@ -44,8 +48,7 @@ namespace TinyAdventure
             inputActions.Player.Move.canceled -= MoveHandler;
             inputActions.Disable();
 
-
-            GameManager.HoldPlayerMovement -= HoldPlayerMovement;
+            GameAction.HoldPlayerMovement -= HoldPlayerMovement;
         }
 
         public void MoveHandler(InputAction.CallbackContext context)
@@ -70,12 +73,14 @@ namespace TinyAdventure
 
                 attackScript.StartAttack(lastDirection);
 
+                sounds.PlaySword();
+
                 StartCoroutine(StopMovementForSeconds(attackScript.attackSpeed));
             }
 
             if (inputActions.Player.Interact.WasPressedThisFrame())
             {
-                GetComponent<TopDownCharInteraction>().SetInteractionInPosition();
+                GetComponentInChildren<TopDownCharInteraction>().SetInteractionInPosition();
             }
 
         }

@@ -8,10 +8,12 @@ public static class DataManager
 
     public static bool playerIsTalking = false;
 
+    public static int player_spawn_index = 0;
+
     public static void CollectMushroom()
     {
         mushroomCount++;
-        GameManager.PlayPickupItem?.Invoke();
+        GameAction.PlayPickupItem?.Invoke();
         Debug.Log($"Mushroom collected! Total: {mushroomCount}");
     }
 }

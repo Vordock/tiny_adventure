@@ -9,6 +9,7 @@ TagManager:
   - Sign
   - Crate
   - Enemy
+  - WayPoint
   layers:
   - Default
   - TransparentFX

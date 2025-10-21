@@ -5,9 +5,17 @@ public class AgentPatrol : MonoBehaviour
     public float speed = 2f;
     public float patrolRadius = 4f;
     public float pointTolerance = 0.2f;
-    public LayerMask obstacleMask;
+    LayerMask obstacleMask;
 
     private Vector2 targetPoint;
+
+    void Awake()
+    {
+        if (TryGetComponent(out AgentVision vision))
+        {
+            obstacleMask = vision.obstacleMask;
+        }
+    }
 
     void Start() => PickRandomPoint();
 

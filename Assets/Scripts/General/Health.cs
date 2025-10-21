@@ -22,7 +22,12 @@ public class Health : MonoBehaviour
             if (spriteRenderer) StartCoroutine(BlinkRoutine());
             currentHealth -= _amount;
 
-            if (currentHealth <= 0) gameObject.SetActive(false);
+            if (TryGetComponent(out PlayerSounds sounds))
+            {
+                sounds.PlayHurt();
+            }
+
+            if (currentHealth <= 0) Destroy(gameObject);
         }
     }
 
