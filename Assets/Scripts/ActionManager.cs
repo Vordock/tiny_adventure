@@ -1,8 +1,8 @@
 using System;
 
-public static class GameAction
+public static class ActionManager
 {
-    public static Action AddCoin;
+    public static Action UpdateCoin;
     public static Action AddPotion;
     public static Action AddKey;
 
@@ -12,4 +12,10 @@ public static class GameAction
     public static Action<bool> HoldPlayerMovement;
 
     public static Action PlayerSpawned;
+
+    public static void AddCoin(int amount)
+    {
+        DataManager.coinCount += amount;
+        UpdateCoin?.Invoke();
+    }
 }

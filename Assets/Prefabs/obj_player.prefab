@@ -174,16 +174,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5722086438203002783}
+  - component: {fileID: 7922855938988251982}
   - component: {fileID: 3615587279961702944}
   - component: {fileID: 2834157922428403616}
-  - component: {fileID: 7922855938988251982}
   m_Layer: 0
   m_Name: obj_actionTrigger
   m_TagString: Interaction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5722086438203002783
 Transform:
   m_ObjectHideFlags: 0
@@ -199,6 +199,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1253957298006569092}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7922855938988251982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698404860825438615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ad38fdfaa3bcb449b722362d76d473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TinyAdventure.TopDownCharInteraction
+  tag1: Mushroom
+  tag2: 
+  tag3: 
 --- !u!58 &3615587279961702944
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -293,21 +308,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7922855938988251982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2698404860825438615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ad38fdfaa3bcb449b722362d76d473, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TinyAdventure.TopDownCharInteraction
-  tag1: Mushroom
-  tag2: 
-  tag3: 
 --- !u!1 &3807412188353585222
 GameObject:
   m_ObjectHideFlags: 0

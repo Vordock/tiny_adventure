@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public static class DataManager
@@ -13,7 +14,7 @@ public static class DataManager
     public static void CollectMushroom()
     {
         mushroomCount++;
-        GameAction.PlayPickupItem?.Invoke();
+        ActionManager.PlayPickupItem?.Invoke();
         Debug.Log($"Mushroom collected! Total: {mushroomCount}");
     }
 }

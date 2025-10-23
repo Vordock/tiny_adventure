@@ -14,12 +14,12 @@ public class CameraFollow : MonoBehaviour
 
 	void OnEnable()
 	{
-		GameAction.PlayerSpawned += SetPlayer;
+		ActionManager.PlayerSpawned += SetPlayer;
 	}
 
 	void OnDisable()
 	{
-		GameAction.PlayerSpawned -= SetPlayer;
+		ActionManager.PlayerSpawned -= SetPlayer;
 	}
 
 	void SetPlayer()

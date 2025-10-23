@@ -16,20 +16,21 @@ public class Collectable : MonoBehaviour
     // Called when another collider enters the trigger collider attached to this object
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the object that entered is the player (tag must be set in Unity)
-        if (other.CompareTag("Player"))
-        {
-            switch (itemType)
-            {
-                case CollectableType.Coin:
-                    GameAction.AddCoin.Invoke();
-                    if (ItemSfx) AudioManager.Instance.PlaySFX(ItemSfx);
-                    break;
+        // // Check if the object that entered is the player (tag must be set in Unity)
+        // if (other.CompareTag("Player"))
+        // {
+        //     switch (itemType)
+        //     {
+        //         case CollectableType.Coin:
 
-            }
+        //             GameAction.AddCoin.Invoke();
+        //             if (ItemSfx) AudioManager.Instance.PlaySFX(ItemSfx);
+        //             break;
 
-            Destroy(gameObject);
+        //     }
 
-        }
+        //     Destroy(gameObject);
+
+        // }
     }
 }

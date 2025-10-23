@@ -10,6 +10,8 @@ namespace TinyAdventure
         TopDownCharMove moveScript;
         TopDownMeleeAttack attackScript;
 
+        TopDownCharInteraction interaction;
+
         public SpriteRenderer spriteRenderer;
 
         public InputActions inputActions; // Nome da sua classe gerada
@@ -39,7 +41,7 @@ namespace TinyAdventure
 
             inputActions.Enable();
 
-            GameAction.HoldPlayerMovement += HoldPlayerMovement;
+            ActionManager.HoldPlayerMovement += HoldPlayerMovement;
         }
 
         private void OnDisable()
@@ -48,7 +50,7 @@ namespace TinyAdventure
             inputActions.Player.Move.canceled -= MoveHandler;
             inputActions.Disable();
 
-            GameAction.HoldPlayerMovement -= HoldPlayerMovement;
+            ActionManager.HoldPlayerMovement -= HoldPlayerMovement;
         }
 
         public void MoveHandler(InputAction.CallbackContext context)
@@ -80,7 +82,7 @@ namespace TinyAdventure
 
             if (inputActions.Player.Interact.WasPressedThisFrame())
             {
-                GetComponentInChildren<TopDownCharInteraction>().SetInteractionInPosition();
+                interaction.SetInteractionInPosition();
             }
 
         }

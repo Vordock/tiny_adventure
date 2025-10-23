@@ -20,7 +20,7 @@ public class SpawnPlayer : MonoBehaviour
 
         if (player != null)
         {
-            GameAction.PlayerSpawned?.Invoke();
+            ActionManager.PlayerSpawned?.Invoke();
         }
         else
         {

@@ -5,8 +5,6 @@ namespace TinyAdventure
 {
     public class TopDownCharInteraction : MonoBehaviour
     {
-        public string tag1, tag2, tag3;
-
         public void SetInteractionInPosition()
         {
             gameObject.SetActive(true);
@@ -30,7 +28,7 @@ namespace TinyAdventure
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Interaction"))
             {
-                if (!string.IsNullOrEmpty(tag1) && collision.CompareTag(tag1))
+                if (collision.CompareTag("Mushroom"))
                 {
                     DataManager.CollectMushroom();
                     collision.gameObject.SetActive(false);
@@ -41,23 +39,23 @@ namespace TinyAdventure
                     }
                 }
 
-                else if (!string.IsNullOrEmpty(tag2) && collision.CompareTag(tag2))
-                {
-                    if (collision.TryGetComponent(out SimpleDialog dialog))
-                    {
-                        dialog.ActiveDialog();
-                    }
+                // else if (!string.IsNullOrEmpty(tag2) && collision.CompareTag(tag2))
+                // {
+                //     if (collision.TryGetComponent(out SimpleDialog dialog))
+                //     {
+                //         dialog.ActiveDialog();
+                //     }
 
-                    else
-                    {
-                        Debug.LogWarning("No SimpleDialog component found on this GameObject.");
-                    }
-                }
+                //     else
+                //     {
+                //         Debug.LogWarning("No SimpleDialog component found on this GameObject.");
+                //     }
+                // }
 
-                else if (!string.IsNullOrEmpty(tag3) && collision.CompareTag(tag3))
-                {
-                    collision.gameObject.SetActive(false);
-                }
+                // else if (!string.IsNullOrEmpty(tag3) && collision.CompareTag(tag3))
+                // {
+                //     collision.gameObject.SetActive(false);
+                // }
             }
         }
     }
