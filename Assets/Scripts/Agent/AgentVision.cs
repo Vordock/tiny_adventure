@@ -2,42 +2,40 @@ using UnityEngine;
 
 public class AgentVision : MonoBehaviour
 {
-    [Header("Visão")]
-    public float visionAngle = 45f; // metade do cone
-    public float visionRange = 6f;
-    public int rayCount = 15; // número de raycasts no cone
+    [Header("Configuração")]
+    public float visionRadius = 6f;
+    public LayerMask playerMask;
     public LayerMask obstacleMask;
 
-    private bool canSeePlayer;
-    private Transform lastTarget;
+    [Header("Event Channel")]
+    public TransformEventChannelSO onTargetSpotted;
 
-    public bool CanSeePlayer(Transform player)
+    private Transform currentTarget;
+
+    void Update()
     {
-        canSeePlayer = false;
-        lastTarget = player;
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, visionRadius, playerMask);
 
-        Vector2 origin = transform.position;
-        Vector2 dirToPlayer = (player.position - transform.position).normalized;
-        float angleToPlayer = Vector2.Angle(transform.right, dirToPlayer);
-
-        // Só continua se o player estiver dentro do cone
-        if (angleToPlayer < visionAngle)
+        if (hit != null)
         {
-            // Faz um raycast direto até o player
-            RaycastHit2D hit = Physics2D.Raycast(origin, dirToPlayer, visionRange, obstacleMask);
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
+            Transform player = hit.transform;
+            Vector2 dir = (player.position - transform.position).normalized;
+            float dist = Vector2.Distance(transform.position, player.position);
+
+            // Raycast para checar obstáculos
+            RaycastHit2D block = Physics2D.Raycast(transform.position, dir, dist, obstacleMask);
+
+            if (block.collider == null && currentTarget != player)
             {
-                canSeePlayer = true;
-                return true;
+                currentTarget = player;
+                onTargetSpotted?.RaiseEvent(player);
             }
         }
-
-        return false;
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, lastTarget.position);
+        else if (currentTarget != null)
+        {
+            // perdeu o alvo
+            currentTarget = null;
+            onTargetSpotted?.RaiseEvent(null);
+        }
     }
 }

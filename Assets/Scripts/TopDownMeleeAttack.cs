@@ -57,6 +57,7 @@ namespace TinyAdventure
 
         void SwingAttack(int _startAngle, int _finalAngle)
         {
+            GetComponent<PlayerSounds>().PlaySword();
             // Set the initial rotation
             weapon.transform.rotation = Quaternion.Euler(0, 0, _startAngle);
 

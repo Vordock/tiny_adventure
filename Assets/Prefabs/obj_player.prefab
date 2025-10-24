@@ -211,9 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ad38fdfaa3bcb449b722362d76d473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TinyAdventure.TopDownCharInteraction
-  tag1: Mushroom
-  tag2: 
-  tag3: 
 --- !u!58 &3615587279961702944
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -557,12 +554,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1253957298006569092}
   - component: {fileID: 3418221774869637393}
+  - component: {fileID: 6163934417641038189}
   - component: {fileID: 6395146195982758041}
   - component: {fileID: 4770903032499981041}
   - component: {fileID: 403734538230106302}
   - component: {fileID: 694001835830377593}
-  - component: {fileID: 6163934417641038189}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: obj_player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -600,9 +597,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49fe054eca6032a4a83ad36a2c9f843e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TinyAdventure.PlayerInput
+  interaction: {fileID: 7922855938988251982}
   spriteRenderer: {fileID: 3086175897064926043}
   movingDirection: {x: 0, y: 0}
   lastDirection: {x: 1, y: 0}
+--- !u!114 &6163934417641038189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502412795872178179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05c6aaf14a895246b7ad2d53bdf3fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSounds
+  swordClip: {fileID: 8300000, guid: 9213aa5eb691b9a4794f1577a0a768d2, type: 3}
+  hurtClip: {fileID: 8300000, guid: 5a842f795f776784ea332749ffae4896, type: 3}
+  CollectClip: {fileID: 8300000, guid: b857b7102f21fab4e8e52158c64e0f52, type: 3}
 --- !u!114 &6395146195982758041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,21 +715,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.002732575, y: -0.068315506}
   m_Size: {x: 0.62570035, y: 0.863369}
   m_Direction: 0
---- !u!114 &6163934417641038189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4502412795872178179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d05c6aaf14a895246b7ad2d53bdf3fc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerSounds
-  swordClip: {fileID: 8300000, guid: 9213aa5eb691b9a4794f1577a0a768d2, type: 3}
-  hurtClip: {fileID: 8300000, guid: 5a842f795f776784ea332749ffae4896, type: 3}
-  CollectClip: {fileID: 8300000, guid: b857b7102f21fab4e8e52158c64e0f52, type: 3}
 --- !u!1 &4830044495836550130
 GameObject:
   m_ObjectHideFlags: 0

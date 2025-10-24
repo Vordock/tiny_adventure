@@ -33,29 +33,25 @@ namespace TinyAdventure
                     DataManager.CollectMushroom();
                     collision.gameObject.SetActive(false);
 
-                    if (TryGetComponent(out PlayerSounds sounds))
+                    PlayerSounds sounds = GetComponentInParent<PlayerSounds>();
+
+                    if (sounds)
                     {
                         sounds.PlayCollect();
                     }
+
+                    else
+                    {
+                        Debug.Log("Not found sound clip!");
+                    }
                 }
 
-                // else if (!string.IsNullOrEmpty(tag2) && collision.CompareTag(tag2))
-                // {
-                //     if (collision.TryGetComponent(out SimpleDialog dialog))
-                //     {
-                //         dialog.ActiveDialog();
-                //     }
+                if (collision.CompareTag("Sign"))
+                {
+                    SimpleDialog dialog = collision.GetComponent<SimpleDialog>();
 
-                //     else
-                //     {
-                //         Debug.LogWarning("No SimpleDialog component found on this GameObject.");
-                //     }
-                // }
-
-                // else if (!string.IsNullOrEmpty(tag3) && collision.CompareTag(tag3))
-                // {
-                //     collision.gameObject.SetActive(false);
-                // }
+                    dialog?.ActiveDialog();
+                }
             }
         }
     }

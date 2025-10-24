@@ -10,7 +10,7 @@ namespace TinyAdventure
         TopDownCharMove moveScript;
         TopDownMeleeAttack attackScript;
 
-        TopDownCharInteraction interaction;
+        public TopDownCharInteraction interaction;
 
         public SpriteRenderer spriteRenderer;
 
@@ -74,8 +74,6 @@ namespace TinyAdventure
                 //Debug.Log($"Last Direction to attack: {lastDirection}");
 
                 attackScript.StartAttack(lastDirection);
-
-                sounds.PlaySword();
 
                 StartCoroutine(StopMovementForSeconds(attackScript.attackSpeed));
             }

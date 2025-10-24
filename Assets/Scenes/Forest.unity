@@ -11495,7 +11495,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 650712452}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -11919,7 +11919,11 @@ GameObject:
   - component: {fileID: 403734537488075358}
   - component: {fileID: 694001837378436761}
   - component: {fileID: 8359199484966718221}
-  - component: {fileID: 8359199484966718227}
+  - component: {fileID: 8359199484966718226}
+  - component: {fileID: 8359199484966718225}
+  - component: {fileID: 8359199484966718224}
+  - component: {fileID: 8359199484966718223}
+  - component: {fileID: 8359199484966718222}
   m_Layer: 0
   m_Name: obj_agent
   m_TagString: Player
@@ -12159,7 +12163,45 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8359199484966718227
+--- !u!114 &8359199484966718222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502412795272884963}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75bce8b96ba90d541b0d5675460cdc83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgentStateMachine
+--- !u!114 &8359199484966718223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502412795272884963}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb5040428c3cac47aca1bf6ce100836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgentAttack
+  attackCooldown: 1.5
+--- !u!114 &8359199484966718224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502412795272884963}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1210ba177728ae449a683d5ac66b829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgentChase
+  speed: 3
+--- !u!114 &8359199484966718225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12168,13 +12210,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 4502412795272884963}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e12193e1ae11864482ef09bc6210e6e, type: 3}
+  m_Script: {fileID: 11500000, guid: ad1be2dd53db7b64e9c3df5c0ffde97a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TinyAdventure.TopDownMeleeAttack
-  weapon: {fileID: 0}
-  attackCooldown: 1
-  attackSpeed: 0.2
-  canAttack: 1
+  m_EditorClassIdentifier: Assembly-CSharp::AgentPatrol
+  speed: 2
+  patrolRadius: 4
+  pointTolerance: 0.2
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &8359199484966718226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502412795272884963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e7af530c17154458a72c78929a7803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgentVision
+  visionRadius: 5
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  onTargetSpotted: {fileID: 11400000, guid: 8ea8631e874b233459300dfb7033ab88, type: 2}
 --- !u!1 &8447921031675312490
 GameObject:
   m_ObjectHideFlags: 0

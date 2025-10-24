@@ -2,11 +2,9 @@ using System;
 using TinyAdventure;
 using UnityEngine;
 
-[RequireComponent(typeof(AgentVision), typeof(AgentPatrol))]
-[RequireComponent(typeof(AgentChase), typeof(AgentAttack))]
 public class AgentStateMachine : MonoBehaviour
 {
-    // public enum AgentState { Patrol, Chase, Attack }
+    public enum AgentState { Patrol, Chase, Attack }
     // public AgentState currentState;
 
     // [Header("References")]
