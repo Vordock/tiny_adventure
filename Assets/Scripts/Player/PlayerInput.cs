@@ -4,13 +4,9 @@ using UnityEngine.InputSystem;
 
 namespace TinyAdventure
 {
-    [RequireComponent(typeof(TopDownCharMove), typeof(TopDownMeleeAttack))]
     public class PlayerInput : MonoBehaviour
     {
         TopDownCharMove moveScript;
-        TopDownMeleeAttack attackScript;
-
-        public TopDownCharInteraction interaction;
 
         public SpriteRenderer spriteRenderer;
 
@@ -23,13 +19,15 @@ namespace TinyAdventure
 
         PlayerSounds sounds;
 
+        [SerializeField] PlayerAction actions;
+
         private void Awake()
         {
             inputActions = new InputActions();
 
             moveScript = GetComponent<TopDownCharMove>();
 
-            attackScript = GetComponent<TopDownMeleeAttack>();
+            //attackScript = GetComponent<TopDownMeleeAttack>();
 
             sounds = GetComponent<PlayerSounds>();
         }
@@ -69,20 +67,11 @@ namespace TinyAdventure
 
         void Update()
         {
-            if (inputActions.Player.Attack.WasPressedThisFrame())
+            if (inputActions.Player.Jump.WasPressedThisFrame())
             {
-                //Debug.Log($"Last Direction to attack: {lastDirection}");
-
-                attackScript.StartAttack(lastDirection);
-
-                StartCoroutine(StopMovementForSeconds(attackScript.attackSpeed));
+                actions.gameObject.SetActive(true);
+                actions.StartInteraction(lastDirection);
             }
-
-            if (inputActions.Player.Interact.WasPressedThisFrame())
-            {
-                interaction.SetInteractionInPosition();
-            }
-
         }
 
         void FlipSpriteByDirection(Vector2 direction)
@@ -91,14 +80,14 @@ namespace TinyAdventure
                 spriteRenderer.flipX = direction.x < 0;
         }
 
-        IEnumerator StopMovementForSeconds(float seconds)
+        public IEnumerator StopMovementForSeconds(float seconds)
         {
             canMove = false;
             moveScript.Move(Vector2.zero);
             yield return new WaitForSeconds(seconds);
 
             canMove = true;
-            // Lê o input atual do jogador
+
             movingDirection = inputActions.Player.Move.ReadValue<Vector2>();
             moveScript.Move(movingDirection);
         }

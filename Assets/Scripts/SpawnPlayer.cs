@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class SpawnPlayer : MonoBehaviour
@@ -9,6 +10,8 @@ public class SpawnPlayer : MonoBehaviour
     [SerializeField] private Transform playerSpawnPointLeft;
     [SerializeField] private Transform playerSpawnPointRight;
 
+    [SerializeField] private CinemachineCamera cinemaCam;
+
     private void Start()
     {
         // Decide o lado baseado no índice do DataManager
@@ -16,26 +19,28 @@ public class SpawnPlayer : MonoBehaviour
             ? playerSpawnPointLeft
             : playerSpawnPointRight;
 
-        GameObject player = SpawnPlayerAtPosition(spawnPoint.position);
-
-        if (player != null)
+        if (spawnPoint != null)
         {
-            ActionManager.PlayerSpawned?.Invoke();
+            SpawnPlayerAtPosition(spawnPoint.position);
         }
+
         else
         {
             Debug.LogError("Falha ao spawnar o jogador. Prefab não configurado.");
         }
     }
 
-    private GameObject SpawnPlayerAtPosition(Vector2 position)
+    private void SpawnPlayerAtPosition(Vector3 position)
     {
         if (playerPrefab == null)
         {
-            Debug.LogError("PlayerPrefab não atribuído no Inspector!");
-            return null;
+            Debug.LogError("No PlayerPrefab found!");
+            return;
         }
 
-        return Instantiate(playerPrefab, position, Quaternion.identity);
+        GameObject player = Instantiate(playerPrefab, position, Quaternion.identity);
+        ActionManager.PlayerSpawned?.Invoke();
+
+        if (cinemaCam) cinemaCam.Target.TrackingTarget = player.transform;
     }
 }

@@ -48,10 +48,16 @@ namespace TinyAdventure
 
                 if (collision.CompareTag("Sign"))
                 {
-                    SimpleDialog dialog = collision.GetComponent<SimpleDialog>();
+                    // SimpleDialog dialog = collision.GetComponent<SimpleDialog>();
 
-                    dialog?.ActiveDialog();
+                    // dialog?.ActiveDialog();
                 }
+            }
+
+            else
+            {
+                // GetComponentInParent<TopDownMeleeAttack>().StartAttack(GetComponentInParent<PlayerInput>().lastDirection);
+                // StartCoroutine(GetComponentInParent<PlayerInput>().StopMovementForSeconds(GetComponentInParent<TopDownMeleeAttack>().attackSpeed));
             }
         }
     }

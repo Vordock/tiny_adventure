@@ -6,19 +6,32 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] private AudioClip hurtClip;
     [SerializeField] private AudioClip CollectClip;
 
+    AudioSource m_audio;
+
+    void Awake()
+    {
+        m_audio = GetComponent<AudioSource>();
+    }
+
+    void PlaySFX(AudioClip x)
+    {
+        m_audio.clip = x;
+        m_audio.Play();
+    }
+
     public void PlaySword()
     {
-        AudioManager.Instance.PlaySFX(swordClip);
+        PlaySFX(swordClip);
     }
 
     public void PlayHurt()
     {
-        AudioManager.Instance.PlaySFX(hurtClip);
+        PlaySFX(hurtClip);
     }
 
     public void PlayCollect()
     {
-        AudioManager.Instance.PlaySFX(CollectClip);
+        PlaySFX(CollectClip);
     }
 
 }

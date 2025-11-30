@@ -12,6 +12,10 @@ public static class ActionManager
     public static Action<bool> HoldPlayerMovement;
 
     public static Action PlayerSpawned;
+    public static Action PlayerDied;
+
+    public static Action<int> DamagePlayer;
+    public static Action HealPlayer;
 
     public static void AddCoin(int amount)
     {

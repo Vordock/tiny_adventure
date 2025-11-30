@@ -10,6 +10,9 @@ TagManager:
   - Crate
   - Enemy
   - WayPoint
+  - Sage
+  - Inn
+  - Key
   layers:
   - Default
   - TransparentFX
@@ -49,6 +52,9 @@ TagManager:
     locked: 0
   - name: Character
     uniqueID: 2824968555
+    locked: 0
+  - name: Front
+    uniqueID: 3856280649
     locked: 0
   - name: HUD
     uniqueID: 926921163
