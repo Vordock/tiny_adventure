@@ -20,9 +20,24 @@ public class PlayerAction : MonoBehaviour
 
     private IInteractable currentInteractable;
 
+    // Called externally by your Input System script
+    public void OnActionButton(Vector2 _movingDirection)
+    {
+        // Interaction takes priority
+        if (currentInteractable != null)
+        {
+            currentInteractable.StartInteraction();
+            return;
+        }
+
+        // Attack
+
+    }
+
     public void DoAction(Vector2 _movingDirection)
     {
         if (!canAttack) return;
+
         weapon.gameObject.SetActive(true);
 
         if (_movingDirection.x > 0)
@@ -47,7 +62,7 @@ public class PlayerAction : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Direção de ataque indefinida: " + _movingDirection);
+            Debug.LogWarning("Undefined attack direction: " + _movingDirection);
         }
 
         StartCoroutine(CooldownRoutine());
@@ -59,7 +74,8 @@ public class PlayerAction : MonoBehaviour
 
         weapon.transform.rotation = Quaternion.Euler(0, 0, _startAngle);
 
-        weapon.transform.DORotate(new Vector3(0, 0, _finalAngle), attackSpeed, RotateMode.Fast)
+        weapon.transform
+            .DORotate(new Vector3(0, 0, _finalAngle), attackSpeed, RotateMode.Fast)
             .OnComplete(() => weapon.gameObject.SetActive(false));
     }
 
@@ -114,15 +130,13 @@ public class PlayerAction : MonoBehaviour
             if (collision.CompareTag("Sage") || collision.CompareTag("Inn"))
             {
                 currentInteractable = collision.GetComponent<IInteractable>();
-
-                // Just registers the NPC.
-                // Interaction will happen when pressing E.
             }
         }
         else
         {
             // Attack hits something
-            DoAction(GetComponentInParent<PlayerInput>().lastDirection);
+            Vector2 dir = GetComponentInParent<PlayerInput>().lastDirection;
+            DoAction(dir);
         }
     }
 
@@ -135,21 +149,6 @@ public class PlayerAction : MonoBehaviour
             {
                 currentInteractable = null;
             }
-        }
-    }
-
-    void Update()
-    {
-        // If in range of NPC AND dialogue is closed -> attempt interaction
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (DialogueSystem.Instance.DialogueIsOpen)
-            {
-                DialogueSystem.Instance.NextLine();
-                return;
-            }
-
-            currentInteractable?.StartInteraction();
         }
     }
 }
